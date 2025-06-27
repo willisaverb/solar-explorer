@@ -1,1 +1,60 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Explorer</title>
+  <link rel="stylesheet" href="/assets/solarexplorer.css" />
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="/assets/logo.png" alt="solar explorer" />
+    <div id="map" class="map-section"></div>
+    <div class="image-section" id="planet-section">
+      <img src="/assets/Mars.png" alt="Mars" />
+    </div>
+    <div class="planet-title"><h1>Mars</h1></div>
+    <p>Enter your access code to reveal the location:</p>
+    <input type="text" id="codeInput" placeholder="Enter code" />
+    <br />
+    <button onclick="checkCode()">Submit</button>
+    <div id="map-link">
+      <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
+    </div>
+  </div>
+
+  <script>
+    const correctCode = "SVGAH";
+    const lat = -33.964930057683986;
+    const lng = 151.10142150224368;
+
+    function checkCode() {
+      const input = document.getElementById("codeInput").value.toUpperCase();
+      if (input === correctCode) {
+        showMap();
+      } else {
+        alert("Incorrect code. Please try again.");
+      }
+    }
+
+    function showMap() {
+      const mapDiv = document.getElementById("map");
+      const mapLinkDiv = document.getElementById("map-link");
+      const externalLink = document.getElementById("externalLink");
+      const planetSection = document.getElementById("planet-section");
+
+      mapDiv.style.display = "block";
+      mapLinkDiv.style.display = "block";
+      planetSection.style.order = "2";
+
+      const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
+      mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0"
+        src="${mapUrl}" allowfullscreen></iframe>`;
+
+      externalLink.href = `https://www.google.com/maps?q=${lat},${lng}`;
+    }
+  </script>
+</body>
+</html>
+

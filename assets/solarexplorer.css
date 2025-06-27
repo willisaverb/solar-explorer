@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'Eras Bold ITC';
-  src: url('/assets/ErasBoldITC.ttf') format('truetype');
+  src: url('/assets/eras-itc-bold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-    
+
 }
 
 body {
@@ -67,6 +67,8 @@ astronaut {
     left: 20px;
 }
 
-planet-image {
+h1 {
     margin-top: 1em;
+    color: #e28e25;
+    
 }
