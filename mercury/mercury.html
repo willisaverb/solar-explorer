@@ -1,23 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solar Explorer</title>
-  <link rel="stylesheet" href="/assets/solarexplorer.css" />s
+  <link rel="stylesheet" href="assets/solarexplorer.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Solar Explorer</h1>
-    <div class="image-section">
-      <img src="placeholder.jpg" alt="Planet Placeholder" />
+    <img class="logo" src="assets/logo.png" alt="solar explorer" />
+    <div id="map" class="map-section"></div>
+    <div class="image-section" id="planet-section">
+      <img src="assets/Mercury.png" alt="Mercury" />
     </div>
+    <div class="planet-title"><h1>Mercury</h1></div>
     <p>Enter your access code to reveal the location:</p>
     <input type="text" id="codeInput" placeholder="Enter code" />
     <br />
     <button onclick="checkCode()">Submit</button>
-
-    <div id="map"></div>
     <div id="map-link">
       <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
     </div>
@@ -41,9 +42,11 @@
       const mapDiv = document.getElementById("map");
       const mapLinkDiv = document.getElementById("map-link");
       const externalLink = document.getElementById("externalLink");
+      const planetSection = document.getElementById("planet-section");
 
       mapDiv.style.display = "block";
       mapLinkDiv.style.display = "block";
+      planetSection.style.order = "2";
 
       const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
       mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0"
@@ -54,4 +57,3 @@
   </script>
 </body>
 </html>
-
