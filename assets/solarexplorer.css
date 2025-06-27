@@ -73,3 +73,13 @@ h1 {
     
 }
 
+astronaut {
+    position: absolute;
+    bottom: 0;
+}
+
+rocketship {
+    position: relative;
+    top: 0;
+}
+

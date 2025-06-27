@@ -8,51 +8,30 @@
   <link rel="stylesheet" href="assets/solarexplorer.css" />
 </head>
 <body>
+   
   <div class="container">
-    <h1>Solar Explorer</h1>
+    <img class="logo" src="assets/logo.png"> 
     <div class="image-section">
-      <img src="placeholder.jpg" alt="Planet Placeholder" />
+      <img src="assets/LGA-MAP.png" alt="Planet Placeholder" />
     </div>
-    <p>Enter your access code to reveal the location:</p>
-    <input type="text" id="codeInput" placeholder="Enter code" />
-    <br />
-    <button onclick="checkCode()">Submit</button>
-
-    <div id="map"></div>
-    <div id="map-link">
-      <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
+    <p>Scale Model of the Solar System</p>
+<nav>
+    <a href="/mercury/ "><li>Mercury</li></a>
+    <a href="/venus/"><li>Venus</li></a>
+    <a href="/earth/"><li>Earth</li></a>
+    <a href="/mars/"><li>Mars</li></a>
+    <a href="/jupiter/"><li>Jupiter</li></a>
+    <a href="/saturn/"><li>Saturn</li></a>
+    <a href="/neptune/"><li>Neptune</li></a>
+    <a href="/uranus/"><li>Uranus</li></a>
+      </nav>
     </div>
-  </div>
-<div><img class="astronaut" src="/assets/astronaut.png"></div>
-  <script>
-    const correctCode = "SVGAH";
-    const lat = -33.964930057683986;
-    const lng = 151.10142150224368;
+    
+    
+        
 
-    function checkCode() {
-      const input = document.getElementById("codeInput").value.toUpperCase();
-      if (input === correctCode) {
-        showMap();
-      } else {
-        alert("Incorrect code. Please try again using the code on the Sun sign.");
-      }
-    }
-
-    function showMap() {
-      const mapDiv = document.getElementById("map");
-      const mapLinkDiv = document.getElementById("map-link");
-      const externalLink = document.getElementById("externalLink");
-
-      mapDiv.style.display = "block";
-      mapLinkDiv.style.display = "block";
-
-      const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
-      mapDiv.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0"
-        src="${mapUrl}" allowfullscreen></iframe>`;
-
-      externalLink.href = `https://www.google.com/maps?q=${lat},${lng}`;
-    }
-  </script>
-</body>
+    </body>
+    <div><img class="astronaut" src="/assets/astronaut.png"></div>
+    <div><img class="rocketship" src="/assets/rocket.png"></div>
 </html>
 

@@ -15,7 +15,7 @@
       <img src="../assets/Mercury.png" alt="Mercury" />
     </div>
     <div class="planet-title"><h1>Mercury</h1></div>
-    <p>Enter your access code to reveal the location:</p>
+    <p>Enter code found at the Sun to reveal the location:</p>
     <input type="text" id="codeInput" placeholder="Enter code" />
     <br />
     <button onclick="checkCode()">Submit</button>
@@ -26,8 +26,8 @@
 
   <script>
     const correctCode = "SVGAH";
-    const lat = -33.964930057683986;
-    const lng = 151.10142150224368;
+    const lat = -33.96504810879269; 
+    const lng = 151.10150209690207;
 
     function checkCode() {
       const input = document.getElementById("codeInput").value.toUpperCase();
