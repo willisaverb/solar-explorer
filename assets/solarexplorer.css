@@ -5,6 +5,15 @@ body {
   padding: 0;
 }
 
+
+@font-face {
+  font-family: 'Eras Bold ITC';
+  src: url('assets/ErasBoldITC.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .container {
   max-width: 600px;
   margin: auto;
