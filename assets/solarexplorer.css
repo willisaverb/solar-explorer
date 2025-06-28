@@ -92,7 +92,7 @@ rocketship {
   filter: grayscale(100%) brightness(0.3);
   transform: scale(0.8);
   opacity: 0.5;
-  transition: all 2s ease-in-out;
+  transition: all 4s ease-in-out;
 }
 
 /* When the image is loaded or visible */
@@ -104,4 +104,8 @@ rocketship {
 
 p {
     color: #e28e25;
+}
+
+a {
+    color: #e38e25;
 }
