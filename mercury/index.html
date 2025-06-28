@@ -11,7 +11,7 @@
   <div class="container">
       <a href="../index.html"> <img class="logo" src="../assets/logo.png" alt="solar explorer" /></a>
     <div id="map" class="map-section"></div>
-    <div class="image-section" id="planet-section">
+    <div class="planet-image-section" id="planet-section">
       <img src="../assets/Mercury.png" alt="Mercury" />
     </div>
     <div class="planet-title"><h1>Mercury</h1></div>
@@ -23,6 +23,17 @@
       <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
     </div>
   </div>
+
+    
+    
+<script>
+  window.addEventListener('load', () => {
+    const images = document.querySelectorAll('.planet-image-section');
+    images.forEach(img => {
+      img.classList.add('loaded');
+    });
+  });
+</script>
 
   <script>
     const correctCode = "SVGAH";
