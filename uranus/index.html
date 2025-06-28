@@ -12,7 +12,7 @@
   <div class="container">
     <a href="../index.html"><img class="logo" src="../assets/logo.png" alt="solar explorer" /></a>
     <div id="map" class="map-section"></div>
-    <div class="image-section" id="planet-section">
+    <div class="planet-image-section" id="planet-section">
       <img src="../assets/Uranus.png" alt="Uranus" />
         
     </div>
@@ -26,6 +26,15 @@
     </div>
   </div>
 
+    
+    <script>
+  window.addEventListener('load', () => {
+    const images = document.querySelectorAll('.planet-image-section');
+    images.forEach(img => {
+      img.classList.add('loaded');
+    });
+  });
+</script>
   <script>
     const correctCode = "SVGAH";
     const lat = -33.964930057683986;
