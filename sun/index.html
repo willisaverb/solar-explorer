@@ -12,13 +12,13 @@
       <a href="../index.html"><img class="logo" src="../assets/logo.png" alt="solar explorer" /></a>
     <div id="map" class="map-section"></div>
     <div class="planet-image-section" id="planet-section">
-      <img src="../assets/Saturn.png" alt="Saturn" />
+      <img src="../assets/Venus.png" alt="Venus" />
     </div>
-    <div class="planet-title"><h1>Saturn</h1></div>
-    <p>Enter the code found at Jupiter to reveal the location of Saturn:</p>
+    <div class="planet-title"><h1>Venus</h1></div>
+    <p>Enter the code found at Mercury to reveal the location:</p>
     <input type="text" id="codeInput" placeholder="Enter code" />
     <br />
-    <button onclick="checkCode()">Find Saturn</button>
+    <button onclick="checkCode()">Find Venus</button>
     <div id="map-link">
       <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
     </div>
@@ -34,9 +34,9 @@
   });
 </script>
   <script>
-    const correctCode = "RINGS";
-    const lat = -33.975283862367796;
-    const lng = 151.08592632706785;
+    const correctCode = "SVGAH";
+    const lat = -33.96445247188727; 
+    const lng = 151.1026283563216;
 
     function checkCode() {
       const input = document.getElementById("codeInput").value.toUpperCase();
