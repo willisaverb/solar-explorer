@@ -80,7 +80,7 @@
         }
 
         /* Scaled planet sizes */
-        .scaled-planet[data-planet="sun"] .planet-image     { width: 300px; }
+        .scaled-planet[data-planet="sun"] .planet-image      { width: 300px; }
         .scaled-planet[data-planet="jupiter"] .planet-image { width: 97px;  }
         .scaled-planet[data-planet="saturn"] .planet-image  { width: 133px; }
         .scaled-planet[data-planet="uranus"] .planet-image  { width: 58px;  }
@@ -172,15 +172,12 @@
 
         <div class="calculator">
             <h2>Solar System Scale Model Calculator</h2>
-            <p id="instructionText">Enter the sun's diameter in inches to calculate the scaled planet diameters:</p>
+            <p id="instructionText">Enter the Sun's diameter in millimeters to calculate the scaled planet diameters:</p>
             
             <div class="input-group">
-                <label for="sunDiameter">Sun's Diameter:</label>
-                <input type="number" id="sunDiameter" min="0.1" step="0.1" value="36">
-                <select id="unitSelector" onchange="updateInstructionText()">
-                    <option value="mm">mm</option>
-                    <option value="inches" selected>inches</option>
-                    <option value="feet">feet</option>
+                <label for="sunDiameter">Sun's Diameter (mm):</label>
+                <input type="number" id="sunDiameter" min="0.1" step="0.1" value="914.4"> <select id="unitSelector" onchange="updateInstructionText()" disabled>
+                    <option value="mm" selected>mm</option>
                 </select>
             </div>
             
@@ -232,70 +229,79 @@
     </div>
 
     <script>
+        // All diameters and distances are in kilometers (km) for the actual values
         const planetData = {
-            sun: { name: "Sun", diameter: 1392684000000 },
-            mercury: { name: "Mercury", distance: 57.9, diameter: 4879 },
-            venus: { name: "Venus", distance: 108.2, diameter: 12104 },
-            earth: { name: "Earth", distance: 149.6, diameter: 12756 },
-            mars: { name: "Mars", distance: 227.9, diameter: 6792 },
-            jupiter: { name: "Jupiter", distance: 778.5, diameter: 142984 },
-            saturn: { name: "Saturn", distance: 1427, diameter: 120536 },
-            uranus: { name: "Uranus", distance: 2871, diameter: 51118 },
-            neptune: { name: "Neptune", distance: 4495, diameter: 49528 }
+            sun: { name: "Sun", diameter: 1392684, distance: 0 }, // Diameter in km
+            mercury: { name: "Mercury", distance: 57.9e6, diameter: 4879 }, // Distance in km, diameter in km
+            venus: { name: "Venus", distance: 108.2e6, diameter: 12104 },
+            earth: { name: "Earth", distance: 149.6e6, diameter: 12756 },
+            mars: { name: "Mars", distance: 227.9e6, diameter: 6792 },
+            jupiter: { name: "Jupiter", distance: 778.5e6, diameter: 142984 },
+            saturn: { name: "Saturn", distance: 1434.0e6, diameter: 120536 },
+            uranus: { name: "Uranus", distance: 2871.0e6, diameter: 51118 },
+            neptune: { name: "Neptune", distance: 4495.0e6, diameter: 49528 },
+            pluto: { name: "Pluto", diameter: 2376, distance: 5900.0e6 } // Added Pluto for completeness, distance is approximate average
         };
+
+        /**
+         * Formats a given value in millimeters to a more readable metric unit (mm, meters, km).
+         * @param {number} valueMM - The value in millimeters.
+         * @returns {string} The formatted string with appropriate unit.
+         */
+        function formatMetricUnit(valueMM) {
+            if (valueMM < 1) { // Less than 1 mm
+                return `${valueMM.toFixed(3)} mm`;
+            } else if (valueMM < 1000) { // Less than 1 meter
+                return `${valueMM.toFixed(2)} mm`;
+            } else if (valueMM < 1000 * 1000) { // Less than 1 kilometer (1,000,000 mm)
+                return `${(valueMM / 1000).toFixed(2)} meters`;
+            } else if (valueMM < 1000 * 1000 * 1000) { // Less than 1000 kilometers (1,000,000,000 mm)
+                return `${(valueMM / (1000 * 1000)).toFixed(2)} km`;
+            } else { // For very large distances, keep in kilometers
+                return `${(valueMM / (1000 * 1000)).toFixed(0)} km`; // No decimals for very large km values
+            }
+        }
 
         function calculateScale() {
             const sunDiameterInput = parseFloat(document.getElementById('sunDiameter').value);
-            const unit = document.getElementById('unitSelector').value;
-            let sunDiameterInches;
-            if (unit === 'mm') {
-                sunDiameterInches = sunDiameterInput / 25.4;
-            } else if (unit === 'feet') {
-                sunDiameterInches = sunDiameterInput * 12;
-            } else {
-                sunDiameterInches = sunDiameterInput;
-            }
-            if (isNaN(sunDiameterInches) || sunDiameterInches <= 0) {
-                alert('Please enter a valid diameter for the sun');
+            
+            if (isNaN(sunDiameterInput) || sunDiameterInput <= 0) {
+                alert('Please enter a valid diameter for the Sun in millimeters.');
                 return;
             }
             
-            const scale = sunDiameterInches / 1392700; // Sun's actual diameter in km
-            
-            const planets = [
-                { name: 'Sun', diameter: 1392700, distance: 0, image: 'sun.png' },
-                { name: 'Mercury', diameter: 4879, distance: 57900000, image: 'mercury.png' },
-                { name: 'Venus', diameter: 12104, distance: 108200000, image: 'venus.png' },
-                { name: 'Earth', diameter: 12756, distance: 149600000, image: 'earth.png' },
-                { name: 'Mars', diameter: 6792, distance: 227900000, image: 'mars.png' },
-                { name: 'Jupiter', diameter: 142984, distance: 778500000, image: 'jupiter.png' },
-                { name: 'Saturn', diameter: 120536, distance: 1434000000, image: 'saturn.png' },
-                { name: 'Uranus', diameter: 51118, distance: 2871000000, image: 'uranus.png' },
-                { name: 'Neptune', diameter: 49528, distance: 4495000000, image: 'neptune.png' },
-                { name: 'Pluto', diameter: 2376, distance: 5900000000, image: 'pluto.png' }
-            ];
+            // Actual Sun's diameter in millimeters (1,392,684 km * 1,000,000 mm/km)
+            const actualSunDiameterMM = planetData.sun.diameter * 1e6; // Using 1e6 for 1,000,000
+            // The user's input is already in millimeters
+            const modelSunDiameterMM = sunDiameterInput; 
+
+            // Calculate the scale factor: actual size / model size
+            const scaleFactor = actualSunDiameterMM / modelSunDiameterMM; 
             
             let resultHTML = '<h2>Scaled Solar System Model</h2>';
             resultHTML += '<div class="scaled-planets">';
             
-            planets.forEach(planet => {
-                const scaledDiameter = planet.diameter * scale;
-                const scaledDistance = planet.distance * scale;
-                const planetKey = planet.name.toLowerCase();
+            for (const planetKey in planetData) {
+                const planet = planetData[planetKey];
+                const scaledDiameterMM = (planet.diameter * 1e6) / scaleFactor; // Convert km to mm, then scale
+                const scaledDistanceMM = (planet.distance * 1e6) / scaleFactor; // Convert km to mm, then scale
                 
+                const formattedDiameter = formatMetricUnit(scaledDiameterMM);
+                const formattedDistance = formatMetricUnit(scaledDistanceMM);
+
                 resultHTML += `
                     <div class="scaled-planet" data-planet="${planetKey}">
-                        <img src="images/${planet.image}" alt="${planet.name}" class="planet-image">
+                        <img src="images/${planetKey}.png" alt="${planet.name}" class="planet-image">
                         <div class="planet-details">
                             <h3>${planet.name}</h3>
                             <div class="planet-info">
-                                <div>Diameter: ${scaledDiameter.toFixed(2)} inches</div>
-                                <div>Distance from Sun: ${scaledDistance.toFixed(2)} inches</div>
+                                <div>Diameter: ${formattedDiameter}</div>
+                                <div>Distance from Sun: ${formattedDistance}</div>
                             </div>
                         </div>
                     </div>
                 `;
-            });
+            }
             
             resultHTML += '</div>';
             
@@ -303,71 +309,53 @@
         }
 
         function calculateDistance() {
-            const planet1 = document.getElementById('object1').value;
-            const planet2 = document.getElementById('object2').value;
+            const object1Key = document.getElementById('object1').value;
+            const object2Key = document.getElementById('object2').value;
             const sunDiameterInput = parseFloat(document.getElementById('sunDiameter').value);
-            const unit = document.getElementById('unitSelector').value;
-            let sunDiameterInches;
-            if (unit === 'mm') {
-                sunDiameterInches = sunDiameterInput / 25.4;
-            } else if (unit === 'feet') {
-                sunDiameterInches = sunDiameterInput * 12;
-            } else {
-                sunDiameterInches = sunDiameterInput;
-            }
-            if (isNaN(sunDiameterInches) || sunDiameterInches <= 0) {
-                alert('Please enter a valid diameter for the sun');
+
+            if (isNaN(sunDiameterInput) || sunDiameterInput <= 0) {
+                alert('Please enter a valid diameter for the Sun in millimeters.');
                 return;
             }
-            const realSunDiameterMM = 1392684000000;
-            const modelSunDiameterMM = sunDiameterInches * 25.4;
-            const scaleFactor = realSunDiameterMM / modelSunDiameterMM;
-            const distance1MM = planet1 === 'sun' ? 0 : planetData[planet1].distance * 1e9;
-            const distance2MM = planet2 === 'sun' ? 0 : planetData[planet2].distance * 1e9;
-            let scaledDistance;
-            if (unit === 'mm') {
-                scaledDistance = Math.abs(distance1MM - distance2MM) / scaleFactor;
-            } else if (unit === 'feet') {
-                scaledDistance = Math.abs(distance1MM - distance2MM) / scaleFactor / 304.8;
-            } else {
-                scaledDistance = Math.abs(distance1MM - distance2MM) / scaleFactor / 25.4;
-            }
+
+            const object1 = planetData[object1Key];
+            const object2 = planetData[object2Key];
+
+            // Actual Sun's diameter in millimeters
+            const actualSunDiameterMM = planetData.sun.diameter * 1e6; 
+            // User's input is already in millimeters
+            const modelSunDiameterMM = sunDiameterInput; 
+            const scaleFactor = actualSunDiameterMM / modelSunDiameterMM;
+
+            // Convert actual distances to millimeters for calculation
+            const distance1MM = object1.distance * 1e6; 
+            const distance2MM = object2.distance * 1e6; 
+
+            // Calculate the absolute difference and scale it
+            const scaledDistanceMM = Math.abs(distance1MM - distance2MM) / scaleFactor;
+            
+            const formattedScaledDistance = formatMetricUnit(scaledDistanceMM);
             
             let resultHTML = '<div class="planet-results">';
-            if (planet1 !== 'sun') {
-                resultHTML += `<div class="planet-result">
-                    <img src="images/${planet1}.png" alt="${planetData[planet1].name}" class="planet-image">
-                    <div>${planetData[planet1].name}</div>
-                </div>`;
-            } else {
-                resultHTML += `<div class="planet-result">
-                    <img src="images/sun.png" alt="Sun" class="planet-image">
-                    <div>Sun</div>
-                </div>`;
-            }
+            resultHTML += `<div class="planet-result">
+                <img src="images/${object1Key}.png" alt="${object1.name}" class="planet-image">
+                <div>${object1.name}</div>
+            </div>`;
             resultHTML += '<div style="text-align: center; padding: 1em;">↔️</div>';
-            if (planet2 !== 'sun') {
-                resultHTML += `<div class="planet-result">
-                    <img src="images/${planet2}.png" alt="${planetData[planet2].name}" class="planet-image">
-                    <div>${planetData[planet2].name}</div>
-                </div>`;
-            } else {
-                resultHTML += `<div class="planet-result">
-                    <img src="images/sun.png" alt="Sun" class="planet-image">
-                    <div>Sun</div>
-                </div>`;
-            }
+            resultHTML += `<div class="planet-result">
+                <img src="images/${object2Key}.png" alt="${object2.name}" class="planet-image">
+                <div>${object2.name}</div>
+            </div>`;
             resultHTML += '</div>';
-            resultHTML += `<p><strong>Distance:</strong> ${scaledDistance.toFixed(2)} ${unit}</p>`;
+            resultHTML += `<p><strong>Distance:</strong> ${formattedScaledDistance}</p>`;
             
             document.getElementById('distanceResult').innerHTML = resultHTML;
         }
 
+        // The instruction text always refers to millimeters now
         function updateInstructionText() {
-            const unit = document.getElementById('unitSelector').value;
-            const instructionText = document.getElementById('instructionText');
-            instructionText.textContent = `Enter the sun's diameter in ${unit} to calculate the scaled planet diameters:`;
+            document.getElementById('instructionText').textContent = `Enter the Sun's diameter in millimeters to calculate the scaled planet diameters:`;
         }
-    </script>
-</body>
-</html> 
+
+        // Initialize on page load
+        document
