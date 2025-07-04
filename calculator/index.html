@@ -89,7 +89,7 @@
         .scaled-planet[data-planet="venus"] .planet-image   { width: 28px;  }
         .scaled-planet[data-planet="mars"] .planet-image    { width: 21px;  }
         .scaled-planet[data-planet="mercury"] .planet-image { width: 18px;  }
-        .scaled-planet[data-planet="pluto"] .planet-image   { width: 13px;  }
+        .scaled-planet[data-planet="pluto"] .planet-image   { width: 13px;  } /* Kept for styling, but Pluto isn't in calculations */
 
         /* Calculators */
         .calculator {
@@ -230,6 +230,7 @@
 
     <script>
         // All diameters and distances are in kilometers (km) for the actual values
+        // Moved planetData to global scope so it's accessible by all functions
         const planetData = {
             sun: { name: "Sun", diameter: 1392684, distance: 0 }, // Diameter in km
             mercury: { name: "Mercury", distance: 57.9e6, diameter: 4879 }, // Distance in km, diameter in km
@@ -239,8 +240,8 @@
             jupiter: { name: "Jupiter", distance: 778.5e6, diameter: 142984 },
             saturn: { name: "Saturn", distance: 1434.0e6, diameter: 120536 },
             uranus: { name: "Uranus", distance: 2871.0e6, diameter: 51118 },
-            neptune: { name: "Neptune", distance: 4495.0e6, diameter: 49528 },
-            pluto: { name: "Pluto", diameter: 2376, distance: 5900.0e6 } // Added Pluto for completeness, distance is approximate average
+            neptune: { name: "Neptune", distance: 4495.0e6, diameter: 49528 }
+            // Removed Pluto as it's not in the select options for consistency
         };
 
         /**
@@ -358,4 +359,10 @@
         }
 
         // Initialize on page load
-        document
+        document.addEventListener('DOMContentLoaded', () => {
+            updateInstructionText();
+            calculateScale(); // Calculate on initial load
+        });
+    </script>
+</body>
+</html>
