@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Calculator</title>
+    <style>
+        body { 
+            font-family: 'Fira Mono', 'Consolas', 'Liberation Mono', 'Menlo', 'Monaco', 'Fixedsys', monospace; 
+            background: #f9f9f9; 
+            color: #222; 
+            margin: 0; 
+            padding: 2em; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 2em auto; 
+            background: #fff; 
+            padding: 2em 2.5em; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07); 
+        }
+        h1, h2 { 
+            text-align: center; 
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        h2 {
+            margin-top: 2em;
+            font-size: 1.5em;
+        }
+
+        /* Shared Image Style */
+        .planet-image {
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Scaled Planets in Results */
+        .scaled-planets {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1em;
+            margin: 2em 0;
+        }
+        .scaled-planet {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            text-align: left;
+            background: #fafafa;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .scaled-planet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .scaled-planet .planet-image {
+            height: auto;
+            flex-shrink: 0;
+        }
+        .scaled-planet h3 {
+            margin-top: 0;
+            margin-bottom: 0.25em;
+            font-size: 1.1em;
+        }
+        .scaled-planet .planet-info {
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Scaled planet sizes */
+        .scaled-planet[data-planet="sun"] .planet-image      { width: 300px; }
+        .scaled-planet[data-planet="jupiter"] .planet-image { width: 97px;  }
+        .scaled-planet[data-planet="saturn"] .planet-image  { width: 133px; }
+        .scaled-planet[data-planet="uranus"] .planet-image  { width: 58px;  }
+        .scaled-planet[data-planet="neptune"] .planet-image { width: 57px;  }
+        .scaled-planet[data-planet="earth"] .planet-image   { width: 29px;  }
+        .scaled-planet[data-planet="venus"] .planet-image   { width: 28px;  }
+        .scaled-planet[data-planet="mars"] .planet-image    { width: 21px;  }
+        .scaled-planet[data-planet="mercury"] .planet-image { width: 18px;  }
+        .scaled-planet[data-planet="pluto"] .planet-image   { width: 13px;  } /* Kept for styling, but Pluto isn't in calculations */
+
+        /* Calculators */
+        .calculator {
+            margin-top: 3em;
+            padding: 1.5em;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        .input-group {
+            margin-bottom: 1em;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        input[type="number"], select {
+            padding: 0.8em;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+        button {
+            padding: 0.8em 1.5em;
+            border: none;
+            background: #333;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1em;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #555;
+        }
+
+        /* Results */
+        .result {
+            margin-top: 1em;
+            padding: 1.5em;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        .planet-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1em;
+            margin-top: 1em;
+        }
+        .planet-result {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .planet-result .planet-image {
+            width: 50px;
+            height: 50px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 2em;
+            color: #4a90e2;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solar System Calculator</h1>
+
+        <div class="calculator">
+            <h2>Solar System Scale Model Calculator</h2>
+            <p id="instructionText">Enter the Sun's diameter in millimeters to calculate the scaled planet diameters:</p>
+            
+            <div class="input-group">
+                <label for="sunDiameter">Sun's Diameter (mm):</label>
+                <input type="number" id="sunDiameter" min="0.1" step="0.1" value="914.4"> <select id="unitSelector" onchange="updateInstructionText()" disabled>
+                    <option value="mm" selected>mm</option>
+                </select>
+            </div>
+            
+            <button onclick="calculateScale()">Calculate</button>
+            
+            <div id="scaleResults" class="result"></div>
+        </div>
+
+        <div class="calculator">
+            <h2>Distance Calculator</h2>
+            <p>Calculate the distance between any two objects in the solar system.</p>
+            
+            <div class="input-group">
+                <label for="object1">First Object:</label>
+                <select id="object1">
+                    <option value="sun">Sun</option>
+                    <option value="mercury">Mercury</option>
+                    <option value="venus">Venus</option>
+                    <option value="earth" selected>Earth</option>
+                    <option value="mars">Mars</option>
+                    <option value="jupiter">Jupiter</option>
+                    <option value="saturn">Saturn</option>
+                    <option value="uranus">Uranus</option>
+                    <option value="neptune">Neptune</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="object2">Second Object:</label>
+                <select id="object2">
+                    <option value="sun">Sun</option>
+                    <option value="mercury">Mercury</option>
+                    <option value="venus">Venus</option>
+                    <option value="earth">Earth</option>
+                    <option value="mars" selected>Mars</option>
+                    <option value="jupiter">Jupiter</option>
+                    <option value="saturn">Saturn</option>
+                    <option value="uranus">Uranus</option>
+                    <option value="neptune">Neptune</option>
+                </select>
+            </div>
+            
+            <button onclick="calculateDistance()">Calculate Distance</button>
+            
+            <div id="distanceResult" class="result"></div>
+        </div>
+
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+
+    <script>
+        // All diameters and distances are in kilometers (km) for the actual values
+        // Moved planetData to global scope so it's accessible by all functions
+        const planetData = {
+            sun: { name: "Sun", diameter: 1392684, distance: 0 }, // Diameter in km
+            mercury: { name: "Mercury", distance: 57.9e6, diameter: 4879 }, // Distance in km, diameter in km
+            venus: { name: "Venus", distance: 108.2e6, diameter: 12104 },
+            earth: { name: "Earth", distance: 149.6e6, diameter: 12756 },
+            mars: { name: "Mars", distance: 227.9e6, diameter: 6792 },
+            jupiter: { name: "Jupiter", distance: 778.5e6, diameter: 142984 },
+            saturn: { name: "Saturn", distance: 1434.0e6, diameter: 120536 },
+            uranus: { name: "Uranus", distance: 2871.0e6, diameter: 51118 },
+            neptune: { name: "Neptune", distance: 4495.0e6, diameter: 49528 }
+            // Removed Pluto as it's not in the select options for consistency
+        };
+
+        /**
+         * Formats a given value in millimeters to a more readable metric unit (mm, meters, km).
+         * @param {number} valueMM - The value in millimeters.
+         * @returns {string} The formatted string with appropriate unit.
+         */
+        function formatMetricUnit(valueMM) {
+            if (valueMM < 1) { // Less than 1 mm
+                return `${valueMM.toFixed(3)} mm`;
+            } else if (valueMM < 1000) { // Less than 1 meter
+                return `${valueMM.toFixed(2)} mm`;
+            } else if (valueMM < 1000 * 1000) { // Less than 1 kilometer (1,000,000 mm)
+                return `${(valueMM / 1000).toFixed(2)} meters`;
+            } else if (valueMM < 1000 * 1000 * 1000) { // Less than 1000 kilometers (1,000,000,000 mm)
+                return `${(valueMM / (1000 * 1000)).toFixed(2)} km`;
+            } else { // For very large distances, keep in kilometers
+                return `${(valueMM / (1000 * 1000)).toFixed(0)} km`; // No decimals for very large km values
+            }
+        }
+
+        function calculateScale() {
+            const sunDiameterInput = parseFloat(document.getElementById('sunDiameter').value);
+            
+            if (isNaN(sunDiameterInput) || sunDiameterInput <= 0) {
+                alert('Please enter a valid diameter for the Sun in millimeters.');
+                return;
+            }
+            
+            // Actual Sun's diameter in millimeters (1,392,684 km * 1,000,000 mm/km)
+            const actualSunDiameterMM = planetData.sun.diameter * 1e6; // Using 1e6 for 1,000,000
+            // The user's input is already in millimeters
+            const modelSunDiameterMM = sunDiameterInput; 
+
+            // Calculate the scale factor: actual size / model size
+            const scaleFactor = actualSunDiameterMM / modelSunDiameterMM; 
+            
+            let resultHTML = '<h2>Scaled Solar System Model</h2>';
+            resultHTML += '<div class="scaled-planets">';
+            
+            for (const planetKey in planetData) {
+                const planet = planetData[planetKey];
+                const scaledDiameterMM = (planet.diameter * 1e6) / scaleFactor; // Convert km to mm, then scale
+                const scaledDistanceMM = (planet.distance * 1e6) / scaleFactor; // Convert km to mm, then scale
+                
+                const formattedDiameter = formatMetricUnit(scaledDiameterMM);
+                const formattedDistance = formatMetricUnit(scaledDistanceMM);
+
+                resultHTML += `
+                    <div class="scaled-planet" data-planet="${planetKey}">
+                        <img src="images/${planetKey}.png" alt="${planet.name}" class="planet-image">
+                        <div class="planet-details">
+                            <h3>${planet.name}</h3>
+                            <div class="planet-info">
+                                <div>Diameter: ${formattedDiameter}</div>
+                                <div>Distance from Sun: ${formattedDistance}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            resultHTML += '</div>';
+            
+            document.getElementById('scaleResults').innerHTML = resultHTML;
+        }
+
+        function calculateDistance() {
+            const object1Key = document.getElementById('object1').value;
+            const object2Key = document.getElementById('object2').value;
+            const sunDiameterInput = parseFloat(document.getElementById('sunDiameter').value);
+
+            if (isNaN(sunDiameterInput) || sunDiameterInput <= 0) {
+                alert('Please enter a valid diameter for the Sun in millimeters.');
+                return;
+            }
+
+            const object1 = planetData[object1Key];
+            const object2 = planetData[object2Key];
+
+            // Actual Sun's diameter in millimeters
+            const actualSunDiameterMM = planetData.sun.diameter * 1e6; 
+            // User's input is already in millimeters
+            const modelSunDiameterMM = sunDiameterInput; 
+            const scaleFactor = actualSunDiameterMM / modelSunDiameterMM;
+
+            // Convert actual distances to millimeters for calculation
+            const distance1MM = object1.distance * 1e6; 
+            const distance2MM = object2.distance * 1e6; 
+
+            // Calculate the absolute difference and scale it
+            const scaledDistanceMM = Math.abs(distance1MM - distance2MM) / scaleFactor;
+            
+            const formattedScaledDistance = formatMetricUnit(scaledDistanceMM);
+            
+            let resultHTML = '<div class="planet-results">';
+            resultHTML += `<div class="planet-result">
+                <img src="images/${object1Key}.png" alt="${object1.name}" class="planet-image">
+                <div>${object1.name}</div>
+            </div>`;
+            resultHTML += '<div style="text-align: center; padding: 1em;">↔️</div>';
+            resultHTML += `<div class="planet-result">
+                <img src="images/${object2Key}.png" alt="${object2.name}" class="planet-image">
+                <div>${object2.name}</div>
+            </div>`;
+            resultHTML += '</div>';
+            resultHTML += `<p><strong>Distance:</strong> ${formattedScaledDistance}</p>`;
+            
+            document.getElementById('distanceResult').innerHTML = resultHTML;
+        }
+
+        // The instruction text always refers to millimeters now
+        function updateInstructionText() {
+            document.getElementById('instructionText').textContent = `Enter the Sun's diameter in millimeters to calculate the scaled planet diameters:`;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateInstructionText();
+            calculateScale(); // Calculate on initial load
+        });
+    </script>
+</body>
+</html>
