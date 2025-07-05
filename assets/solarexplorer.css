@@ -78,9 +78,11 @@ astronaut {
     bottom: 0;
 }
 
-rocketship {
-    position: relative;
+.rocketship {
+    position: absolute;
     top: 0;
+    max-height: inherit;
+    transform: rotate(-75);
 }
 
 
@@ -108,4 +110,8 @@ p {
 
 a {
     color: #e38e25;
+}
+
+sun-image-section {
+    position: relative;
 }
