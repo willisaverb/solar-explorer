@@ -9,7 +9,7 @@
 body {
   font-family: 'Eras Bold ITC', sans-serif;
   text-align: center;
-  padding: 2em;
+  padding: 1em;
   background-color: #334563;
   margin: 0;
 }
@@ -124,5 +124,178 @@ a {
 }
 
 sun-image-section {
+    display: flex;
     position: relative;
+    height: 100%;
+}
+
+
+
+        h1, h2 { 
+             color: #e38e25;
+            text-align: center; 
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #333;
+        }
+        h1 {
+            color: #e38e25;
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        h2 {
+             color: #e38e25;
+            margin-top: 2em;
+            font-size: 1.5em;
+        }
+
+        /* Shared Image Style */
+        .planet-image {
+    object-fit: cover;
+    border-radius: 8px;
+    height: auto; /* Ensures aspect ratio is maintained when width changes */
+    max-width: 100%; /* Prevents image from overflowing its immediate parent */
+}
+
+  .sun-image {
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+
+
+        /* Scaled Planets in Results */
+       .scaled-planets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    margin: 2em 0;
+}
+
+/* Scaled Planet Container - MODIFIED */
+.scaled-planet {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    text-align: left;
+    background: #fafafa;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-wrap: wrap; /* ADDED: Allows items to wrap onto the next line if space is limited */
+    justify-content: center; /* Optional: Centers content if it wraps onto new lines */
+    text-align: center; /* Optional: Centers text content when wrapped */
+}
+.scaled-planet:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.scaled-planet .planet-image {
+    /* height: auto; - Already in general .planet-image, but good to keep if specific overrides */
+    flex-shrink: 0; /* Still prevents the image from shrinking *too much* if it has specific width defined below */
+}
+.scaled-planet h3 {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+    font-size: 1.1em;
+}
+.scaled-planet .planet-info {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: #666;
+}
+.scaled-planet .planet-details { /* Added this for better flex control of text */
+    flex-grow: 1; /* Allows text section to take up available space */
+    min-width: 150px; /* Optional: ensures text has a minimum width before wrapping */
+}
+
+
+/* Scaled planet sizes - MODIFIED to use responsive units and max-width */
+/* These values are calculated to maintain proportionality while being responsive */
+.scaled-planet[data-planet="sun"] .planet-image      { width: 30vw; max-width: 300px; }
+.scaled-planet[data-planet="jupiter"] .planet-image { width: calc(150/300 * 30vw); max-width: 97px;  }
+.scaled-planet[data-planet="saturn"] .planet-image  { width: calc(133/300 * 30vw); max-width: 133px; }
+.scaled-planet[data-planet="uranus"] .planet-image  { width: calc(58/300 * 30vw); max-width: 58px;  }
+.scaled-planet[data-planet="neptune"] .planet-image { width: calc(57/300 * 30vw); max-width: 57px;  }
+.scaled-planet[data-planet="earth"] .planet-image   { width: calc(29/300 * 30vw); max-width: 29px;  }
+.scaled-planet[data-planet="venus"] .planet-image   { width: calc(28/300 * 30vw); max-width: 28px;  }
+.scaled-planet[data-planet="mars"] .planet-image    { width: calc(21/300 * 30vw); max-width: 21px;  }
+.scaled-planet[data-planet="mercury"] .planet-image { width: calc(18/300 * 30vw); max-width: 18px;  }
+.scaled-planet[data-planet="pluto"] .planet-image   { width: calc(13/300 * 30vw); max-width: 13px;  }
+
+
+/* Calculators (unchanged) */
+.calculator {
+    margin-top: 3em;
+    padding: 1.5em;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+.input-group {
+    margin-bottom: 1em;
+}
+label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+input[type="number"], select {
+    padding: 0.8em;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1em;
+}
+button {
+    padding: 0.8em 1.5em;
+    border: none;
+    background: #333;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #555;
+}
+
+/* Results (unchanged, but behavior improved by flex-wrap) */
+.result {
+    margin-top: 1em;
+    padding: 1.5em;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+.planet-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    margin-top: 1em;
+}
+.planet-result {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background: #fff;
+    border-radius: 8px;
+}
+.planet-result .planet-image {
+    width: 50px;
+    height: 50px;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 2em;
+    color: #4a90e2;
+    text-decoration: none;
+}
+.back-link:hover {
+    text-decoration: underline;
 }
