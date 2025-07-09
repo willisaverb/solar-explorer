@@ -14,6 +14,10 @@ body {
   margin: 0;
 }
 
+h1,h2 {
+    color: 
+}
+
 .container {
   max-width: 600px;
   margin: auto;
@@ -25,6 +29,7 @@ body {
 
 .logo {
   width: 100%;
+    justify-content: center;
   max-width: 300px;
   height: auto;
     z-index: 1000;
@@ -82,6 +87,12 @@ h1 {
     
 }
 
+h2 {
+    
+    color: #e28e25;
+    
+}
+
 astronaut {
     position: absolute;
     bottom: 0;
@@ -131,23 +142,6 @@ sun-image-section {
 
 
 
-        h1, h2 { 
-             color: #e38e25;
-            text-align: center; 
-            font-weight: 300;
-            letter-spacing: 1px;
-            color: #333;
-        }
-        h1 {
-            color: #e38e25;
-            font-size: 2em;
-            margin-bottom: 1em;
-        }
-        h2 {
-             color: #e38e25;
-            margin-top: 2em;
-            font-size: 1.5em;
-        }
 
         /* Shared Image Style */
         .planet-image {
@@ -298,4 +292,13 @@ button:hover {
 }
 .back-link:hover {
     text-decoration: underline;
+}
+
+ul {text-decoration: none;
+    list-style-type: none;
+    justify-content: left;
+}
+
+li {text-decoration: none;
+    list-style-type: none;
 }
