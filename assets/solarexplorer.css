@@ -304,6 +304,6 @@ li {text-decoration: none;
     list-style-type: none;
 }
 
-info-section {
+.info-section {
     justify-content: left;
 }
