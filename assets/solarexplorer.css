@@ -308,6 +308,8 @@ li {text-decoration: none;
     justify-content: left;
 }
 
-grllogo {
+.grllogo {
     max-width: inherit;
+    margin-bottom: 2em;
+    margin-top: 2em;
 }
