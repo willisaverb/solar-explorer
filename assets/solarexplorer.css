@@ -83,13 +83,13 @@ astronaut {
 
 h1 {
     
-    color: #e28e25;
+    color: #ffaa3b;
     
 }
 
 h2 {
     
-    color: #e28e25;
+    color: #ffaa3b;
     
 }
 
@@ -127,11 +127,11 @@ astronaut {
 }
 
 p {
-    color: #e28e25;
+    color: #ffaa3b;
 }
 
 a {
-    color: #e38e25;
+    color: #ffaa3b;
 }
 
 sun-image-section {
@@ -314,4 +314,33 @@ li {text-decoration: none;
     max-width: inherit;
     margin-bottom: 1.5em;
     margin-top: 1.5em;
+}
+.planet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+.planet-grid a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+.planet-grid img {
+  /* width is now set by JS */
+  height: auto;
+  border-radius: 8px;
+}
+.planet-grid span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+a:focus, button:focus {
+  outline: 3px solid #ffaa3b;
+  outline-offset: 2px;
 }
