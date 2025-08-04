@@ -306,10 +306,12 @@ li {text-decoration: none;
 
 .info-section {
     justify-content: left;
+    text-align: left;
+    max-width: inherit;
 }
 
 .grllogo {
     max-width: inherit;
-    margin-bottom: 2em;
-    margin-top: 2em;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
 }

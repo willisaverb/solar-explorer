@@ -6,11 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solar Explorer</title>
   <link rel="stylesheet" href="assets/solarexplorer.css" />
+    
 </head>
 <body>
     <div>
-         <a href="../index.html"><img class="grllogo" src="../assets/GRL_Logo_white.svg" alt="solar explorer" /></a>
-        <img class="logo" src="assets/logo.png"> 
+         <img class="grllogo" src="assets/GRL_Logo_white.svg" alt="solar explorer" />
+             <div>
+             <img class="logo" src="assets/logo.png">
+             </div>
       
     </div>
   <div class="container">
@@ -22,27 +25,57 @@
 
         <p>Georges River Libraries have created a scale model of the solar system for you to explore.</p>
 
-<p>Starting at the Sun at Hurstville Library, and ending at a secret location on the western edge of the Georges River LGA, this is a planetary treasure hunt on an astronimic scale.</p>
+<p>Starting at the Sun at Hurstville Library, and ending at a secret location on the western edge of the Georges River LGA, this is a planetary treasure hunt on an astronimical scale.</p>
 
 <p>Jump in your spaceship, follow the clues to find all the planets this National Science Week 9-16 August!</p>
 
-<p><a href="https://www.eventbrite.com.au/e/solar-explorer-explore-a-scale-model-of-the-solar-system-tickets-1422965531209?aff=erelexpmlt" target="_blank"> Register now </a> to receive access to the Solar Explorer kit in August, which gives you everything you need to participate in this activity. This event is a great way for families to learn STEM together and participate in a hunt that is out of this world!
+<button><a href="https://www.eventbrite.com.au/e/solar-explorer-explore-a-scale-model-of-the-solar-system-tickets-1422965531209?aff=erelexpmlt" target="_blank"> Register now </a></button> 
+        <p> Register on Eventbrite using the button above to receive access to the Solar Explorer kit in August, which gives you everything you need to participate in this activity. This event is a great way for families to learn STEM together and participate in a hunt that is out of this world!
 
 </p>
     </div>
-    <p>Scale Model of the Solar System</p>
-<nav>
-    <a href="sun/ "><li>the Sun</li></a>
-    <a href="mercury/ "><li>Mercury</li></a>
-    <a href="venus/"><li>Venus</li></a>
-    <a href="earth/"><li>Earth</li></a>
-    <a href="mars/"><li>Mars</li></a>
-    <a href="jupiter/"><li>Jupiter</li></a>
-    <a href="saturn/"><li>Saturn</li></a>
-    <a href="uranus/"><li>Uranus</li></a>
-    <a href="neptune/"><li>Neptune</li></a>
-    
-      </nav>
+      
+      <div>    <p>Use this section to re-find the planets if you lose them.</p>
+<div class="planet-quickfind">
+  
+  <div class="planet-grid">
+    <a href="sun/"><img src="assets/sun%20copy.png" alt="Sun"><span>Sun</span></a>
+    <a href="mercury/"><img src="assets/mercury.png" alt="Mercury"><span>Mercury</span></a>
+    <a href="venus/"><img src="assets/venus.png" alt="Venus"><span>Venus</span></a>
+    <a href="earth/"><img src="assets/earth.png" alt="Earth"><span>Earth</span></a>
+    <a href="mars/"><img src="assets/mars.png" alt="Mars"><span>Mars</span></a>
+    <a href="jupiter/"><img src="assets/jupiter.png" alt="Jupiter"><span>Jupiter</span></a>
+    <a href="saturn/"><img src="assets/saturn.png" alt="Saturn"><span>Saturn</span></a>
+    <a href="uranus/"><img src="assets/uranus.png" alt="Uranus"><span>Uranus</span></a>
+    <a href="neptune/"><img src="assets/neptune.png" alt="Neptune"><span>Neptune</span></a>
+  </div>
+</div>
+
+<style>
+.planet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+.planet-grid a {
+  text-decoration: none;
+  color: inherit;
+}
+.planet-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.planet-grid span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+</style>
+
+          </div>
+
     </div>
    
     
