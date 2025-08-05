@@ -218,7 +218,7 @@ sun-image-section {
 .scaled-planet[data-planet="mars"] .planet-image    { width: calc(21/300 * 30vw); max-width: 21px;  }
 .scaled-planet[data-planet="mercury"] .planet-image { width: calc(18/300 * 30vw); max-width: 18px;  }
 .scaled-planet[data-planet="pluto"] .planet-image   { width: calc(13/300 * 30vw); max-width: 13px;  }
-
+    
 
 /* Calculators (unchanged) */
 .calculator {
