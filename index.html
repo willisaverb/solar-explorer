@@ -39,40 +39,17 @@
 <div class="planet-quickfind">
   
   <div class="planet-grid">
-    <a href="sun/"><img src="assets/SUN_GSFC_20171208_Archive_e001435~large.jpg" alt="Sun"><span>Sun</span></a>
-    <a href="mercury/"><img src="assets/Mercury.png" alt="Mercury"><span>Mercury</span></a>
-    <a href="venus/"><img src="assets/Venus.png" alt="Venus"><span>Venus</span></a>
-    <a href="earth/"><img src="assets/Earth.png" alt="Earth"><span>Earth</span></a>
-    <a href="mars/"><img src="assets/Mars.png" alt="Mars"><span>Mars</span></a>
-    <a href="jupiter/"><img src="assets/Jupiter.png" alt="Jupiter"><span>Jupiter</span></a>
-    <a href="saturn/"><img src="assets/Saturn.png" alt="Saturn"><span>Saturn</span></a>
-    <a href="uranus/"><img src="assets/Uranus.png" alt="Uranus"><span>Uranus</span></a>
-    <a href="neptune/"><img src="assets/Neptune.png" alt="Neptune"><span>Neptune</span></a>
+    <a href="sun/" data-planet="sun"><img src="assets/SUN_GSFC_20171208_Archive_e001435~large.jpg" alt="Sun"><span>Sun</span></a>
+    <a href="mercury/" data-planet="mercury"><img src="assets/Mercury.png" alt="Mercury"><span>Mercury</span></a>
+    <a href="venus/" data-planet="venus"><img src="assets/Venus.png" alt="Venus"><span>Venus</span></a>
+    <a href="earth/" data-planet="earth"><img src="assets/Earth.png" alt="Earth"><span>Earth</span></a>
+    <a href="mars/" data-planet="mars"><img src="assets/Mars.png" alt="Mars"><span>Mars</span></a>
+    <a href="jupiter/" data-planet="jupiter"><img src="assets/Jupiter.png" alt="Jupiter"><span>Jupiter</span></a>
+    <a href="saturn/" data-planet="saturn"><img src="assets/Saturn.png" alt="Saturn"><span>Saturn</span></a>
+    <a href="uranus/" data-planet="uranus"><img src="assets/Uranus.png" alt="Uranus"><span>Uranus</span></a>
+    <a href="neptune/" data-planet="neptune"><img src="assets/Neptune.png" alt="Neptune"><span>Neptune</span></a>
   </div>
 </div>
-
-<style>
-.planet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-  text-align: center;
-}
-.planet-grid a {
-  text-decoration: none;
-  color: inherit;
-}
-.planet-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.planet-grid span {
-  display: block;
-  margin-top: 0.5rem;
-  font-weight: bold;
-}
-</style>
 
           </div>
 
@@ -81,6 +58,7 @@
     
         
 <img src="assets/LGA-MAP.png" alt="Planet Placeholder" />
+    <script src="assets/main.js"></script>
     </body>
     <div><img class="astronaut" src="../assets/astronaut.png"></div>
    <div class='container'><a href='./calculator/' alt='solar system claculator'>Calculate your own scale model of the solar system</a></div>

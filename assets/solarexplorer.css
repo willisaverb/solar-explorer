@@ -1,9 +1,9 @@
+/* General Styles */
 @font-face {
   font-family: 'Eras Bold ITC';
   src: url('/assets/eras-itc-bold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-
 }
 
 body {
@@ -12,10 +12,7 @@ body {
   padding: 1em;
   background-color: #334563;
   margin: 0;
-}
-
-h1,h2 {
-    color: 
+  color: #ffaa3b;
 }
 
 .container {
@@ -27,91 +24,51 @@ h1,h2 {
   align-items: center;
 }
 
-.logo {
-  width: 100%;
-    justify-content: center;
-  max-width: 300px;
-  height: auto;
-    z-index: 1000;
+h1, h2 {
+    color: #ffaa3b;
 }
 
-.logo-section {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-    z-index: 1000;
+a {
+    color: #ffaa3b;
+    text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header and Logo */
+.logo, .logo-section {
+  width: 100%;
+  justify-content: center;
+  max-width: 300px;
+  height: auto;
+  z-index: 1000;
+}
+
+.grllogo {
+    max-width: inherit;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+
+/* Main Content */
+.info-section {
+    justify-content: left;
+    text-align: left;
+    max-width: inherit;
+}
 
 .image-section img {
   max-width: 100%;
   height: auto;
   margin-bottom: 1em;
-    margin-top: 2em;
-}
-
-input[type="text"] {
-  text-transform: uppercase;
-  font-size: 1.2em;
-  padding: 0.5em;
-  width: 80%;
-  max-width: 300px;
-}
-
-button {
-  padding: 0.5em 1em;
-  font-size: 1em;
-  margin-top: 1em;
-}
-
-#map {
   margin-top: 2em;
-  width: 100%;
-  height: 400px;
-  display: none;
 }
-
-#map-link {
-  display: none;
-  margin-top: 1em;
-}
-
-astronaut {
-    position: absolute;
-    left: 20px;
-}
-
-h1 {
-    
-    color: #e28e25;
-    
-}
-
-h2 {
-    
-    color: #e28e25;
-    
-}
-
-astronaut {
-    position: absolute;
-    bottom: 0;
-}
-
-.rocketship {
-    position: absolute;
-    top: 0;
-    max-height: 200px;
-    transform: scale(75%);
-    z-index: 0;
-    right: 1vw
-}
-
 
 .planet-image-section {
   max-width: 100%;
   height: auto;
-  
   margin-top: 1em;
   filter: grayscale(100%) brightness(0.3);
   transform: scale(0.8);
@@ -119,47 +76,121 @@ astronaut {
   transition: all 4s ease-in-out;
 }
 
-/* When the image is loaded or visible */
 .planet-image-section.loaded {
   filter: grayscale(0%) brightness(1);
   transform: scale(1);
   opacity: 1;
 }
 
-p {
-    color: #e28e25;
+/* Planet Grid */
+.planet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  text-align: center;
 }
 
-a {
-    color: #e38e25;
+.planet-grid a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: inherit;
 }
 
-sun-image-section {
-    display: flex;
-    position: relative;
-    height: 100%;
+.planet-grid img {
+  height: auto;
+  border-radius: 8px;
 }
 
+.planet-grid span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
 
-
-
-        /* Shared Image Style */
-        .planet-image {
+/* Shared Image Styles */
+.planet-image, .sun-image {
     object-fit: cover;
     border-radius: 8px;
-    height: auto; /* Ensures aspect ratio is maintained when width changes */
-    max-width: 100%; /* Prevents image from overflowing its immediate parent */
+    height: auto;
+    max-width: 100%;
 }
 
-  .sun-image {
-            object-fit: cover;
-            border-radius: 8px;
-        }
+/* Calculator */
+.calculator {
+    margin-top: 3em;
+    padding: 1.5em;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
 
+.input-group {
+    margin-bottom: 1em;
+}
 
+label {
+    display: block;
+    margin-bottom: 0.5em;
+}
 
-        /* Scaled Planets in Results */
-       .scaled-planets {
+input[type="text"], input[type="number"], select {
+  font-size: 1.2em;
+  padding: 0.5em;
+  width: 80%;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+button {
+  padding: 0.8em 1.5em;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1em;
+  transition: background 0.2s;
+  margin-top: 1em;
+}
+
+button:hover {
+    background: #555;
+}
+
+.result {
+    margin-top: 1em;
+    padding: 1.5em;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.planet-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.planet-result {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.planet-result .planet-image {
+    width: 50px;
+    height: 50px;
+}
+
+.scaled-planets {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -167,7 +198,6 @@ sun-image-section {
     margin: 2em 0;
 }
 
-/* Scaled Planet Container - MODIFIED */
 .scaled-planet {
     display: flex;
     align-items: center;
@@ -178,36 +208,38 @@ sun-image-section {
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     transition: transform 0.2s, box-shadow 0.2s;
-    flex-wrap: wrap; /* ADDED: Allows items to wrap onto the next line if space is limited */
-    justify-content: center; /* Optional: Centers content if it wraps onto new lines */
-    text-align: center; /* Optional: Centers text content when wrapped */
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
+
 .scaled-planet:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
 .scaled-planet .planet-image {
-    /* height: auto; - Already in general .planet-image, but good to keep if specific overrides */
-    flex-shrink: 0; /* Still prevents the image from shrinking *too much* if it has specific width defined below */
+    flex-shrink: 0;
 }
+
 .scaled-planet h3 {
     margin-top: 0;
     margin-bottom: 0.25em;
     font-size: 1.1em;
 }
+
 .scaled-planet .planet-info {
     margin-top: 0.5em;
     font-size: 0.9em;
     color: #666;
 }
-.scaled-planet .planet-details { /* Added this for better flex control of text */
-    flex-grow: 1; /* Allows text section to take up available space */
-    min-width: 150px; /* Optional: ensures text has a minimum width before wrapping */
+
+.scaled-planet .planet-details {
+    flex-grow: 1;
+    min-width: 150px;
 }
 
-
-/* Scaled planet sizes - MODIFIED to use responsive units and max-width */
-/* These values are calculated to maintain proportionality while being responsive */
+/* These styles are for the initial display of the calculator page */
 .scaled-planet[data-planet="sun"] .planet-image      { width: 30vw; max-width: 300px; }
 .scaled-planet[data-planet="jupiter"] .planet-image { width: calc(150/300 * 30vw); max-width: 97px;  }
 .scaled-planet[data-planet="saturn"] .planet-image  { width: calc(133/300 * 30vw); max-width: 133px; }
@@ -220,67 +252,24 @@ sun-image-section {
 .scaled-planet[data-planet="pluto"] .planet-image   { width: calc(13/300 * 30vw); max-width: 13px;  }
 
 
-/* Calculators (unchanged) */
-.calculator {
-    margin-top: 3em;
-    padding: 1.5em;
-    border: 1px solid #eee;
-    border-radius: 8px;
-}
-.input-group {
-    margin-bottom: 1em;
-}
-label {
-    display: block;
-    margin-bottom: 0.5em;
-}
-input[type="number"], select {
-    padding: 0.8em;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 1em;
-}
-button {
-    padding: 0.8em 1.5em;
-    border: none;
-    background: #333;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 1em;
-    transition: background 0.2s;
-}
-button:hover {
-    background: #555;
+/* Miscellaneous */
+.rocketship {
+    position: absolute;
+    top: 0;
+    max-height: 200px;
+    transform: scale(75%);
+    z-index: 0;
+    right: 1vw
 }
 
-/* Results (unchanged, but behavior improved by flex-wrap) */
-.result {
-    margin-top: 1em;
-    padding: 1.5em;
-    background: #f8f9fa;
-    border: 1px solid #eee;
-    border-radius: 8px;
+.astronaut {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
 }
-.planet-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1em;
-    margin-top: 1em;
-}
-.planet-result {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    padding: 1em;
-    background: #fff;
-    border-radius: 8px;
-}
-.planet-result .planet-image {
-    width: 50px;
-    height: 50px;
+
+#map, #map-link {
+  display: none;
 }
 
 .back-link {
@@ -288,30 +277,15 @@ button:hover {
     text-align: center;
     margin-top: 2em;
     color: #4a90e2;
+}
+
+ul, li {
     text-decoration: none;
-}
-.back-link:hover {
-    text-decoration: underline;
-}
-
-ul {text-decoration: none;
-    list-style-type: none;
-    justify-content: left;
-
-}
-
-li {text-decoration: none;
     list-style-type: none;
 }
 
-.info-section {
-    justify-content: left;
-    text-align: left;
-    max-width: inherit;
-}
-
-.grllogo {
-    max-width: inherit;
-    margin-bottom: 1.5em;
-    margin-top: 1.5em;
+/* Accessibility */
+a:focus, button:focus {
+  outline: 3px solid #ffaa3b;
+  outline-offset: 2px;
 }
