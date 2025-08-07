@@ -11,20 +11,21 @@
   <div class="container">
        <a href="../index.html"><img class="grllogo" src="../assets/GRL_Logo_white.svg" alt="solar explorer" /></a>
       <a href="../index.html"><img class="logo" src="../assets/logo.png" alt="solar explorer" /></a>
-    <div id="map" class="map-section"></div>
-    <div class="sun-image-section" id="planet-section">
-      <img src="../assets/sun-GSFC_20171208_Archive_e001435~large.png" alt="the Sun" />
+       <div id="map-link">
+      <a id="externalLink" href="#" target="_blank">Hurstville Library - corner of Dora St and Queens Rd, Hurstville Open in Google Maps</a>
     </div>
-    <div class="planet-title"><h1>Venus</h1></div>
-    <p>Enter the code found at Mercury to reveal the location:</p>
+    <div id="map" class="map-section"></div>
+   
+    <div class="planet-title"><h1>Start at the Sun</h1></div>
+    <p>Enter the code "SOLAR" to reveal the location:</p>
     <input type="text" id="codeInput" placeholder="Enter code" />
     <br />
-    <button onclick="checkCode()">Find Venus</button>
-    <div id="map-link">
-      <a id="externalLink" href="#" target="_blank">Open in Google Maps</a>
-    </div>
+    <button onclick="checkCode()">Start Solar Explorer</button>
+   
   </div>
-    
+     <div class="sun-image-section" id="planet-section">
+      <img src="../assets/sun-GSFC_20171208_Archive_e001435~large.png" alt="the Sun" />
+    </div>
 
     
     <script>
@@ -36,9 +37,9 @@
   });
 </script>
   <script>
-    const correctCode = "SVGAH";
-    const lat = -33.96445247188727; 
-    const lng = 151.1026283563216;
+    const correctCode = "SOLAR";
+    const lat = -33.96439627137742;
+    const lng = 151.10100149010012;
 
     function checkCode() {
       const input = document.getElementById("codeInput").value.toUpperCase();

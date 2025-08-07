@@ -134,10 +134,11 @@ a {
     color: #e38e25;
 }
 
-sun-image-section {
+.sun-image-section {
     display: flex;
     position: relative;
     height: 100%;
+    object-fit: cover;
 }
 
 
