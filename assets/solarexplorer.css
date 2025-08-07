@@ -316,3 +316,7 @@ li {text-decoration: none;
     margin-bottom: 1.5em;
     margin-top: 1.5em;
 }
+
+.planet-grid {
+    color: #e38e25;
+}
