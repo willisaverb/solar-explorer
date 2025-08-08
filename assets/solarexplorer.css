@@ -308,7 +308,7 @@ li {text-decoration: none;
 .info-section {
     justify-content: left;
     text-align: left;
-    max-width: inherit;
+    max-width: auto;    
 }
 
 .grllogo {
